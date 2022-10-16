@@ -134,6 +134,7 @@
     <ClCompile Include="src\Source Files\Personagem.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitattributes" />
     <None Include=".gitignore" />
     <None Include="packages.config" />
     <None Include="README.md" />

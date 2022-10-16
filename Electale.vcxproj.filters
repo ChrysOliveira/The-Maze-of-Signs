@@ -26,6 +26,7 @@
     <None Include=".gitignore" />
     <None Include="README.md" />
     <None Include="packages.config" />
+    <None Include=".gitattributes" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Header Files\Electale.h">

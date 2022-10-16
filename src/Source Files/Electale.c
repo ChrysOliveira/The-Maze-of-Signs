@@ -31,7 +31,7 @@ int main(){
 	al_init_image_addon();
 	al_install_keyboard();
 
-	display = al_create_display(800, 640);
+	display = al_create_display(800, 600);
 
 	filaEventos = al_create_event_queue();
 

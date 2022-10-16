@@ -1,4 +1,5 @@
 ﻿  Electale.c
-C:\Users\chrys\OneDrive\Documentos\jogoBCC\src\Source Files\Electale.c(46): error C4700: uninitialized local variable 'timer' used
-C:\Users\chrys\OneDrive\Documentos\jogoBCC\src\Source Files\Electale.c(46): error C4700: uninitialized local variable 'filaEventos' used
-C:\Users\chrys\OneDrive\Documentos\jogoBCC\src\Source Files\Electale.c(46): error C4700: uninitialized local variable 'display' used
+  Personagem.c
+  Generating Code...
+  LINK : C:\Users\chrys\Documents\Electale\jogoBCC\x64\Debug\Electale.exe not found or not built by the last incremental link; performing full link
+  Electale.vcxproj -> C:\Users\chrys\Documents\Electale\jogoBCC\x64\Debug\Electale.exe
