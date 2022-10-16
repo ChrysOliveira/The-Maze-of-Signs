@@ -1,1 +1,2 @@
-.vs/*
+/packages/
+!packages/repositories.config
