@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Source Files\mapa.c" />
     <ClCompile Include="src\Source Files\Electale.c" />
     <ClCompile Include="src\Source Files\Personagem.c" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Header Files\mapa.h" />
     <ClInclude Include="src\Header Files\Personagem.h" />
     <ClInclude Include="src\Header Files\Electale.h" />
   </ItemGroup>
