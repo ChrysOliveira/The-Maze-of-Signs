@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\mapasEmTxt\mapa1.txt" />
+    <Text Include="assets\mapasEmTxt\mapaGrazi.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

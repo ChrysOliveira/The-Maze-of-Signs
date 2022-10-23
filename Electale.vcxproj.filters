@@ -44,5 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\mapasEmTxt\mapa1.txt" />
+    <Text Include="assets\mapasEmTxt\mapaGrazi.txt" />
   </ItemGroup>
 </Project>

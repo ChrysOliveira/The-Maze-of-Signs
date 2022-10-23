@@ -4,8 +4,6 @@
 #include <allegro5/allegro_image.h>
 #include "../Header Files/Electale.h"
 #include "../Header Files/Personagem.h"
-#include "../Header Files/mapa.h"
-#define CHAO 0
 
 void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer, Mapa mapa) {
 	al_uninstall_keyboard();
@@ -44,8 +42,8 @@ int main(){
 	timer = al_create_timer(1 / 60.0);
 
 	personagem.personagemBitmap = al_load_bitmap("../../assets/bitmaps/abc.png");
-	personagem.personagemPosicaoX = 0;
-	personagem.personagemPosicaoY = 0;
+	personagem.personagemPosicaoX = 40;
+	personagem.personagemPosicaoY = 40;
 
 	bitmapMapa = al_load_bitmap("../../assets/bitmaps/testemapa.png");
 
@@ -54,7 +52,7 @@ int main(){
 	registraEventosNaFila(filaEventos, display, timer);
 
 	desenhaMapa(&mapa, bitmapMapa);
-	desenhaPersonagem(&personagem);
+	desenhaPersonagem(&personagem,personagem.personagemPosicaoX,personagem.personagemPosicaoY);
 
 
 	while (1) {
@@ -73,7 +71,7 @@ int main(){
 			exit(1);
 		}
 
-		movimenta(keyboardState, &personagem);
+		movimenta(&mapa, keyboardState, &personagem);
 	}
 	
 	removeComponentes(display, &personagem, filaEventos, timer, mapa);

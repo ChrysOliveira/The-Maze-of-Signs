@@ -1,6 +1,2 @@
-﻿  Electale.c
-C:\Users\chrys\Documents\Electale\jogoBCC\src\Source Files\Electale.c(8,1): warning C4005: 'CHAO': macro redefinition
-C:\Users\chrys\Documents\Electale\jogoBCC\src\Header Files\mapa.h(4): message : see previous definition of 'CHAO'
-  Personagem.c
-  Generating Code...
+﻿  Personagem.c
   Electale.vcxproj -> C:\Users\chrys\Documents\Electale\jogoBCC\x64\Debug\Electale.exe
