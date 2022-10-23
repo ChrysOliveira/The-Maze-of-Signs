@@ -24,5 +24,5 @@ void movimenta(ALLEGRO_KEYBOARD_STATE keyboardState,Personagem* personagem) {
 }
 
 void desenhaPersonagem(Personagem * personagem) {
-	al_draw_scaled_bitmap(personagem->personagemBitmap, 50, 50, 50, 50, 0, 0, 50, 50, 0);
+	al_draw_scaled_bitmap(personagem->personagemBitmap, 50, 50, 40, 40, 0, 0, 40, 40, 0);
 }

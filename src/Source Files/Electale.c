@@ -4,13 +4,16 @@
 #include <allegro5/allegro_image.h>
 #include "../Header Files/Electale.h"
 #include "../Header Files/Personagem.h"
+#include "../Header Files/mapa.h"
+#define CHAO 0
 
-void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer) {
+void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer, Mapa mapa) {
 	al_uninstall_keyboard();
 	al_destroy_display(display);
 	al_destroy_bitmap(personagem->personagemBitmap);
 	al_destroy_event_queue(queue);
 	al_destroy_timer(timer);
+	void liberaMapa(mapa);
 }
 
 void registraEventosNaFila(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* display, ALLEGRO_TIMER* timer) {
@@ -22,6 +25,9 @@ void registraEventosNaFila(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* display,
 int main(){
 
 	Personagem personagem;
+	Mapa mapa;
+
+	ALLEGRO_BITMAP* bitmapMapa;
 	ALLEGRO_DISPLAY* display;
 	ALLEGRO_EVENT_QUEUE * filaEventos;
 	ALLEGRO_TIMER* timer;
@@ -40,9 +46,14 @@ int main(){
 	personagem.personagemBitmap = al_load_bitmap("../../assets/bitmaps/abc.png");
 	personagem.personagemPosicaoX = 0;
 	personagem.personagemPosicaoY = 0;
-	
+
+	bitmapMapa = al_load_bitmap("../../assets/bitmaps/testemapa.png");
+
+	leMapa(&mapa);
+
 	registraEventosNaFila(filaEventos, display, timer);
 
+	desenhaMapa(&mapa, bitmapMapa);
 	desenhaPersonagem(&personagem);
 
 
@@ -50,7 +61,7 @@ int main(){
 
 		al_flip_display();
 
-		al_clear_to_color(al_map_rgb(0, 0, 0));
+		desenhaMapa(&mapa, bitmapMapa);
 
 		ALLEGRO_EVENT evento;
 		
@@ -65,7 +76,7 @@ int main(){
 		movimenta(keyboardState, &personagem);
 	}
 	
-	removeComponentes(display, &personagem, filaEventos, timer);
+	removeComponentes(display, &personagem, filaEventos, timer, mapa);
 	
 }
 
