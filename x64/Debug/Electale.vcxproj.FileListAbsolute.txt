@@ -1,2 +1,3 @@
 C:\Users\chrys\Documents\Electale\jogoBCC\x64\Debug\Electale.exe
 C:\Users\chrys\OneDrive\Documentos\jogoBCC\x64\Debug\Electale.exe
+C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\x64\Debug\Electale.exe

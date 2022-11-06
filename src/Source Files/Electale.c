@@ -25,7 +25,11 @@ int main(){
 	Personagem personagem;
 	Mapa mapa;
 
-	ALLEGRO_BITMAP* bitmapMapa;
+	ALLEGRO_BITMAP* bitmapChao;
+	ALLEGRO_BITMAP* bitmapParede;
+	ALLEGRO_BITMAP* bitmapDica;
+	ALLEGRO_BITMAP* bitmapSemDica;
+	ALLEGRO_BITMAP* bitmapPoder;
 	ALLEGRO_DISPLAY* display;
 	ALLEGRO_EVENT_QUEUE * filaEventos;
 	ALLEGRO_TIMER* timer;
@@ -45,13 +49,18 @@ int main(){
 	personagem.personagemPosicaoX = 40;
 	personagem.personagemPosicaoY = 40;
 
-	bitmapMapa = al_load_bitmap("../../assets/bitmaps/testemapa.png");
+	bitmapChao = al_load_bitmap("../../assets/bitmaps/chao.png");
+	bitmapParede = al_load_bitmap("../../assets/bitmaps/parede.png");
+	bitmapDica = al_load_bitmap("../../assets/bitmaps/dica.png");
+	bitmapSemDica = al_load_bitmap("../../assets/bitmaps/semDica.png");
+	bitmapPoder = al_load_bitmap("../../assets/bitmaps/poder.png");
+
 
 	leMapa(&mapa);
 
 	registraEventosNaFila(filaEventos, display, timer);
 
-	desenhaMapa(&mapa, bitmapMapa);
+	desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapDica, bitmapPoder);
 	desenhaPersonagem(&personagem,personagem.personagemPosicaoX,personagem.personagemPosicaoY);
 
 
@@ -59,7 +68,8 @@ int main(){
 
 		al_flip_display();
 
-		desenhaMapa(&mapa, bitmapMapa);
+
+		desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapDica, bitmapPoder);
 
 		ALLEGRO_EVENT evento;
 		
