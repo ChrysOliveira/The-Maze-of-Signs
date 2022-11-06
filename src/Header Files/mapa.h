@@ -4,8 +4,9 @@
 
 #define CHAO '0'
 #define PAREDE '1'
-#define PAREDE2 '1'
-#define MONSTRO 'M'
+#define PORTA '2'
+#define DICA '3'
+#define PODER '5'
 
 typedef struct mapa Mapa;
 
@@ -18,6 +19,6 @@ struct mapa {
 void alocaMapa(Mapa* mapa);
 void liberaMapa(Mapa * mapa);
 void leMapa(Mapa * mapa);
-void desenhaMapa(Mapa* mapa, ALLEGRO_BITMAP* bitmap);
+void desenhaMapa(Mapa*mapa, ALLEGRO_BITMAP *chao, ALLEGRO_BITMAP *parede, ALLEGRO_BITMAP *dica, ALLEGRO_BITMAP *poder );
 int ehParede(Mapa* mapa, int posicaoX, int posicaoY);
 

@@ -26,6 +26,10 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 		else {
 			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 		}
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+	
 	}
 
 	else
@@ -36,7 +40,7 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 		printf("Personagem: atualX:%d atualY:%d\nVai pra   : novoX:%d novoY:%d\n\n",
 			personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->personagemPosicaoX, personagem->personagemPosicaoY + 41);
 
-		int x = (personagem->personagemPosicaoY + 41) / 40; 
+		int x = (personagem->personagemPosicaoY + 41) / 40;
 		int y = personagem->personagemPosicaoX / 40;
 
 		printf("Para o eh parede x=%d  e y=%d\n", x, y);
@@ -51,6 +55,9 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 		else {
 			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 		}
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 
 	}
 	else if (al_key_down(&keyboardState, ALLEGRO_KEY_LEFT)) {
@@ -75,6 +82,10 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 		else {
 			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 		}
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
 	}
 	else if (al_key_down(&keyboardState, ALLEGRO_KEY_RIGHT)) {
 
@@ -101,6 +112,10 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 	}else
 	{
 		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
 	}
 }
 
