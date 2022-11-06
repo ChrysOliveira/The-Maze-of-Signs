@@ -1,7 +1,7 @@
 #include <allegro5/allegro.h>
 #include "../Header Files/Personagem.h"
 
-void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState,Personagem* personagem ) {
+void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem) {
 
 	if (al_key_down(&keyboardState, ALLEGRO_KEY_UP)) {
 
@@ -28,7 +28,8 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState,Personagem* pers
 		}
 	}
 
-	else if (al_key_down(&keyboardState, ALLEGRO_KEY_DOWN)) {
+	else
+	if (al_key_down(&keyboardState, ALLEGRO_KEY_DOWN)) {
 
 		//CODIGO PARA DEBUGAR A MOVIMENTACAO
 		/*printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
@@ -97,6 +98,9 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState,Personagem* pers
 		else {
 			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 		}
+	}else
+	{
+		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 	}
 }
 

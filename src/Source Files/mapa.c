@@ -71,9 +71,6 @@ int ehParede(Mapa * mapa, int posicaoX, int posicaoY) {
 	if (mapa->matriz[x][y] != PAREDE && mapa->matriz[x][y] != PAREDE2) {
 		return 0;
 	}
-	else if (mapa->matriz[x][y] == NULL) {
-		return 0;
-	}
 	
 	return 1;
 }

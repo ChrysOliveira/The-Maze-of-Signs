@@ -4,14 +4,16 @@
 #include <allegro5/allegro_image.h>
 #include "../Header Files/Electale.h"
 #include "../Header Files/Personagem.h"
+#include "../Header Files/Monstro.h"
 
-void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer, Mapa mapa) {
+void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer, Mapa mapa, Monstro * monstros) {
 	al_uninstall_keyboard();
 	al_destroy_display(display);
 	al_destroy_bitmap(personagem->personagemBitmap);
 	al_destroy_event_queue(queue);
 	al_destroy_timer(timer);
 	void liberaMapa(mapa);
+	desalocaMonstros(monstros);
 }
 
 void registraEventosNaFila(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* display, ALLEGRO_TIMER* timer) {
@@ -24,7 +26,8 @@ int main(){
 
 	Personagem personagem;
 	Mapa mapa;
-
+	Monstro monstros;
+	
 	ALLEGRO_BITMAP* bitmapMapa;
 	ALLEGRO_DISPLAY* display;
 	ALLEGRO_EVENT_QUEUE * filaEventos;
@@ -49,12 +52,21 @@ int main(){
 
 	leMapa(&mapa);
 
+	//pega a qnt de monstros no mapa
+	int qntMonstros = quantidadeMonstros(&mapa);
+	//grava as posicoes dos monstros
+	alocaMonstros(&monstros, qntMonstros);
+	localizaMonstros(&mapa,&monstros,qntMonstros);
+
+	
+
 	registraEventosNaFila(filaEventos, display, timer);
 
 	desenhaMapa(&mapa, bitmapMapa);
 	desenhaPersonagem(&personagem,personagem.personagemPosicaoX,personagem.personagemPosicaoY);
 
-
+	desenhaMonstros(&monstros, qntMonstros);
+	
 	while (1) {
 
 		al_flip_display();
@@ -63,6 +75,7 @@ int main(){
 
 		ALLEGRO_EVENT evento;
 		
+		
 		al_get_keyboard_state(&keyboardState);
 
 		al_wait_for_event(filaEventos, &evento);
@@ -70,11 +83,10 @@ int main(){
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			exit(1);
 		}
-
+		movimentaMonstros(&mapa,&monstros,qntMonstros);
 		movimenta(&mapa, keyboardState, &personagem);
 	}
 	
-	removeComponentes(display, &personagem, filaEventos, timer, mapa);
+	removeComponentes(display, &personagem, filaEventos, timer, mapa, &monstros);
 	
 }
-

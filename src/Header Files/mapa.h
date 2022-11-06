@@ -5,6 +5,7 @@
 #define CHAO '0'
 #define PAREDE '1'
 #define PAREDE2 '1'
+#define MONSTRO 'M'
 
 typedef struct mapa Mapa;
 
