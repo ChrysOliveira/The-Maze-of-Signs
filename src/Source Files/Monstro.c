@@ -32,7 +32,6 @@ void alocaMonstros(Monstro * monstros, int qntMonstros)
 void localizaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
 {
     int contLoop = 0;
-    srand(time(NULL));
 
     while (contLoop < qntMonstros)
     {
@@ -42,10 +41,9 @@ void localizaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
             {
                 if (mapa->matriz[i][j] == MONSTRO)
                 {
-                    int direcao = rand() % 5;
                     monstros[contLoop].posicaoX = j*40;
                     monstros[contLoop].posicaoY =  i*40;
-                    monstros[contLoop].direcao = direcao;
+                    monstros[contLoop].direcao = rand() % 5;
                     contLoop++;
                 }   
             }
@@ -56,7 +54,7 @@ void localizaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
 
 void desenhaMonstros(Monstro * monstros, int qntMonstros)
 {
-    for (int i = 0; i < qntMonstros; ++i)
+    for (int i = 0; i < qntMonstros; i++)
     {
         monstros[i].monstroBitmap = al_load_bitmap("../../assets/bitmaps/abc.png");
         al_draw_scaled_bitmap(monstros[i].monstroBitmap, 50, 50, 40, 40, monstros[i].posicaoX, monstros[i].posicaoY, 40, 40, 0);
@@ -70,8 +68,6 @@ void desalocaMonstros(Monstro * monstros)
 
 void movimentaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
 {
-    srand(time(NULL));
-    
     for (int i = 0; i < qntMonstros; i++)
     {
         switch (monstros[i].direcao)
@@ -114,9 +110,11 @@ void movimentaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
                     monstros[i].direcao = rand() % 5;
                 }
             break;
+        default:
+            monstros[i].direcao = rand() % 5;
+            break;
         }
         printf("Posicao do monstro %d eh X:%d e Y:%d e ta na direcao %d\n", i, monstros[i].posicaoX, monstros[i].posicaoY, monstros[i].direcao);
     }
     desenhaMonstros(monstros, qntMonstros);
-
 }

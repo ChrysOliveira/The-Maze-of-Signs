@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include "../Header Files/Electale.h"
@@ -12,7 +13,7 @@ void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_E
 	al_destroy_bitmap(personagem->personagemBitmap);
 	al_destroy_event_queue(queue);
 	al_destroy_timer(timer);
-	void liberaMapa(mapa);
+	liberaMapa(&mapa);
 	desalocaMonstros(monstros);
 }
 
@@ -38,11 +39,14 @@ int main(){
 	al_init_image_addon();
 	al_install_keyboard();
 
+	srand(time(0));
+
 	display = al_create_display(1280, 960);
 
 	filaEventos = al_create_event_queue();
 
-	timer = al_create_timer(1 / 60.0);
+	timer = al_create_timer(1 / 15.0);
+	al_start_timer(timer);
 
 	personagem.personagemBitmap = al_load_bitmap("../../assets/bitmaps/abc.png");
 	personagem.personagemPosicaoX = 40;
@@ -83,7 +87,11 @@ int main(){
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			exit(1);
 		}
-		movimentaMonstros(&mapa,&monstros,qntMonstros);
+
+		if(evento.type == ALLEGRO_EVENT_TIMER)
+		{
+			movimentaMonstros(&mapa,&monstros,qntMonstros);
+		}
 		movimenta(&mapa, keyboardState, &personagem);
 	}
 	
