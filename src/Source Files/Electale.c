@@ -50,10 +50,10 @@ int main(){
 
 	filaEventos = al_create_event_queue();
 
-	timer = al_create_timer(1 / 15.0);
+	timer = al_create_timer(1 / 30.0);
 	al_start_timer(timer);
 
-	personagem.personagemBitmap = al_load_bitmap("../../assets/bitmaps/abc.png");
+	personagem.personagemBitmap = al_load_bitmap("../../assets/bitmaps/perso.png");
 	personagem.personagemPosicaoX = 40;
 	personagem.personagemPosicaoY = 40;
 
@@ -63,47 +63,43 @@ int main(){
 	bitmapSemDica = al_load_bitmap("../../assets/bitmaps/semDica.png");
 	bitmapPoder = al_load_bitmap("../../assets/bitmaps/poder.png");
 
-
 	leMapa(&mapa);
 
 	//pega a qnt de monstros no mapa
 	int qntMonstros = quantidadeMonstros(&mapa);
 	//grava as posicoes dos monstros
 	alocaMonstros(&monstros, qntMonstros);
-	localizaMonstros(&mapa,&monstros,qntMonstros);
-
-	
+	localizaMonstros(&mapa,&monstros,qntMonstros);	
 
 	registraEventosNaFila(filaEventos, display, timer);
 
 	desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapDica, bitmapPoder);
 	desenhaPersonagem(&personagem,personagem.personagemPosicaoX,personagem.personagemPosicaoY);
 
-	desenhaMonstros(&monstros, qntMonstros);
 	
+	desenhaMonstros(&monstros, qntMonstros);
 	while (1) {
-
-		al_flip_display();
-
-
-		desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapDica, bitmapPoder);
-
+	
 		ALLEGRO_EVENT evento;
 		
-		
-		al_get_keyboard_state(&keyboardState);
-
 		al_wait_for_event(filaEventos, &evento);
-
+		
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+			removeComponentes(display, &personagem, filaEventos, timer, mapa, &monstros);
 			exit(1);
 		}
 
 		if(evento.type == ALLEGRO_EVENT_TIMER)
 		{
+			desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapDica, bitmapPoder);
+
+			al_get_keyboard_state(&keyboardState);
 			movimentaMonstros(&mapa,&monstros,qntMonstros);
+			movimenta(&mapa, keyboardState, &personagem, bitmapChao);
+			
+			al_flip_display();
+
 		}
-		movimenta(&mapa, keyboardState, &personagem);
 	}
 	
 	removeComponentes(display, &personagem, filaEventos, timer, mapa, &monstros);

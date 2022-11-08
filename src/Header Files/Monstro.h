@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <allegro5/allegro.h>
-
+#define MONSTRO 'M'
 typedef struct monstro Monstro;
 
 struct monstro

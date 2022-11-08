@@ -12,7 +12,7 @@ struct Personagem {
 	int personagemPosicaoY;
 };
 
-void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem);
+void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem, ALLEGRO_BITMAP * bitmapChao);
 void desenhaPersonagem(Personagem* personagem, int posicaoX, int posicaoY);
 
 

@@ -21,4 +21,5 @@ void liberaMapa(Mapa * mapa);
 void leMapa(Mapa * mapa);
 void desenhaMapa(Mapa*mapa, ALLEGRO_BITMAP *chao, ALLEGRO_BITMAP *parede, ALLEGRO_BITMAP *dica, ALLEGRO_BITMAP *poder );
 int ehParede(Mapa* mapa, int posicaoX, int posicaoY);
-
+void ehDica(Mapa* mapa, int posicaoX, int posicaoY);
+void ehPoder(Mapa* mapa, int posicaoX, int posicaoY);
