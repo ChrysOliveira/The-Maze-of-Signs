@@ -21,6 +21,9 @@
     <ClCompile Include="src\Source Files\Personagem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Source Files\mapa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -35,5 +38,12 @@
     <ClInclude Include="src\Header Files\Personagem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Header Files\mapa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\mapasEmTxt\mapa1.txt" />
+    <Text Include="assets\mapasEmTxt\mapaGrazi.txt" />
   </ItemGroup>
 </Project>

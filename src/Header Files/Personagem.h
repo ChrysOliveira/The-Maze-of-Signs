@@ -1,4 +1,8 @@
 #pragma once
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+
+#include "mapa.h"
 
 typedef struct Personagem Personagem;
 
@@ -8,5 +12,7 @@ struct Personagem {
 	int personagemPosicaoY;
 };
 
-void movimenta(ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem);
-void desenhaPersonagem(Personagem* personagem);
+void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem, ALLEGRO_BITMAP * bitmapChao);
+void desenhaPersonagem(Personagem* personagem, int posicaoX, int posicaoY);
+
+

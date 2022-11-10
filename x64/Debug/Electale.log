@@ -1,5 +1,8 @@
 ﻿  Electale.c
   Personagem.c
-  Generating Code...
-  LINK : C:\Users\chrys\Documents\Electale\jogoBCC\x64\Debug\Electale.exe not found or not built by the last incremental link; performing full link
-  Electale.vcxproj -> C:\Users\chrys\Documents\Electale\jogoBCC\x64\Debug\Electale.exe
+C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\src\Source Files\Personagem.c(30,3): warning C4013: 'ehDica' indefinido; assumindo extern retornando int
+C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\src\Source Files\Personagem.c(31,3): warning C4013: 'ehPoder' indefinido; assumindo extern retornando int
+  mapa.c
+C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\src\Source Files\mapa.c(86,37): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
+  Gerando Código...
+  Electale.vcxproj -> C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\x64\Debug\Electale.exe

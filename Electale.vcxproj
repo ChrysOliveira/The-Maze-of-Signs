@@ -105,7 +105,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions); _CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -130,7 +130,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Source Files\mapa.c" />
     <ClCompile Include="src\Source Files\Electale.c" />
+    <ClCompile Include="src\Source Files\Monstro.c" />
     <ClCompile Include="src\Source Files\Personagem.c" />
   </ItemGroup>
   <ItemGroup>
@@ -140,8 +142,14 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Header Files\mapa.h" />
+    <ClInclude Include="src\Header Files\Monstro.h" />
     <ClInclude Include="src\Header Files\Personagem.h" />
     <ClInclude Include="src\Header Files\Electale.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="assets\mapasEmTxt\mapa1.txt" />
+    <Text Include="assets\mapasEmTxt\mapaGrazi.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

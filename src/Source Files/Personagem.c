@@ -1,28 +1,65 @@
 #include <allegro5/allegro.h>
 #include "../Header Files/Personagem.h"
 
-void movimenta(ALLEGRO_KEYBOARD_STATE keyboardState,Personagem* personagem) {
+void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem, ALLEGRO_BITMAP * bitmapChao) {
 
-	if (al_key_down(&keyboardState, ALLEGRO_KEY_UP)) {	
-		personagem->personagemPosicaoY -= 10;
-		al_draw_scaled_bitmap(personagem->personagemBitmap, 50, 50, 50, 50, personagem->personagemPosicaoX, personagem->personagemPosicaoY, 50, 50, 0);
+	int x = personagem->personagemPosicaoX / 40;
+	int y = personagem->personagemPosicaoY / 40;
+	
+	if (al_key_down(&keyboardState, ALLEGRO_KEY_UP)) {
+		
+		if (!ehParede(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY - 1)) {
+			personagem->personagemPosicaoY -= 10;
+		}
+
+		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+	
 	}
 	else if (al_key_down(&keyboardState, ALLEGRO_KEY_DOWN)) {
-		personagem->personagemPosicaoY += 10;
-		al_draw_scaled_bitmap(personagem->personagemBitmap, 50, 50, 50, 50, personagem->personagemPosicaoX, personagem->personagemPosicaoY, 50, 50, 0);
 
+		if (!ehParede(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY + 41)) {
+			personagem->personagemPosicaoY += 10;
+		}
+		
+		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 	}
 	else if (al_key_down(&keyboardState, ALLEGRO_KEY_LEFT)) {
-		personagem->personagemPosicaoX -= 10;
-		al_draw_scaled_bitmap(personagem->personagemBitmap, 50, 50, 50, 50, personagem->personagemPosicaoX, personagem->personagemPosicaoY, 50, 50, 0);
 
+		if (!ehParede(mapa, personagem->personagemPosicaoX - 1, personagem->personagemPosicaoY)) {
+			personagem->personagemPosicaoX -= 10;
+		}
+		
+		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 	}
 	else if (al_key_down(&keyboardState, ALLEGRO_KEY_RIGHT)) {
-		personagem->personagemPosicaoX += 10;
-		al_draw_scaled_bitmap(personagem->personagemBitmap, 50, 50, 50, 50, personagem->personagemPosicaoX, personagem->personagemPosicaoY, 50, 50, 0);
+
+		if (!ehParede(mapa, personagem->personagemPosicaoX + 41, personagem->personagemPosicaoY)) {
+			personagem->personagemPosicaoX += 10;
+		}
+		
+		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+	}else
+	{
+		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
+		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
+
 	}
 }
 
-void desenhaPersonagem(Personagem * personagem) {
-	al_draw_scaled_bitmap(personagem->personagemBitmap, 50, 50, 50, 50, 0, 0, 50, 50, 0);
+void desenhaPersonagem(Personagem * personagem, int posicaoX, int posicaoY) {
+	al_draw_scaled_bitmap(personagem->personagemBitmap, 0, 0, 40, 40, posicaoX, posicaoY, 40, 40, 0);
 }
