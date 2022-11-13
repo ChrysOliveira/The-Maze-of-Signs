@@ -7,7 +7,10 @@
 typedef struct Personagem Personagem;
 
 struct Personagem {
-	ALLEGRO_BITMAP* personagemBitmap;
+	ALLEGRO_BITMAP* personagemBaixo;
+	ALLEGRO_BITMAP* personagemCima;
+	ALLEGRO_BITMAP* personagemEsquerda;
+	ALLEGRO_BITMAP* personagemDireita;
 	int personagemPosicaoX;
 	int personagemPosicaoY;
 };

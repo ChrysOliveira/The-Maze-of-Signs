@@ -8,7 +8,7 @@
 void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer, Mapa mapa) {
 	al_uninstall_keyboard();
 	al_destroy_display(display);
-	al_destroy_bitmap(personagem->personagemBitmap);
+	al_destroy_bitmap(personagem->personagemCima);
 	al_destroy_event_queue(queue);
 	al_destroy_timer(timer);
 	void liberaMapa(mapa);
@@ -27,13 +27,24 @@ int main(){
 
 	ALLEGRO_BITMAP* bitmapChao;
 	ALLEGRO_BITMAP* bitmapParede;
+	ALLEGRO_BITMAP* bitmapPorta;
 	ALLEGRO_BITMAP* bitmapDica;
-	ALLEGRO_BITMAP* bitmapSemDica;
 	ALLEGRO_BITMAP* bitmapPoder;
+	ALLEGRO_BITMAP* bitmapPlacar;
+	ALLEGRO_BITMAP* bitmapPlacarL;
+	ALLEGRO_BITMAP* bitmapPlacarI;
+	ALLEGRO_BITMAP* bitmapPlacarB;
+	ALLEGRO_BITMAP* bitmapPlacarR;
+	ALLEGRO_BITMAP* bitmapPlacarA;
 	ALLEGRO_DISPLAY* display;
 	ALLEGRO_EVENT_QUEUE * filaEventos;
 	ALLEGRO_TIMER* timer;
 	ALLEGRO_KEYBOARD_STATE keyboardState;
+
+	ALLEGRO_BITMAP* personagemBaixo;
+	ALLEGRO_BITMAP* personagemCima;
+	ALLEGRO_BITMAP* personagemEsqueda;
+	ALLEGRO_BITMAP* personagemDireita;
 	
 	al_init();
 	al_init_image_addon();
@@ -45,23 +56,31 @@ int main(){
 
 	timer = al_create_timer(1 / 60.0);
 
-	personagem.personagemBitmap = al_load_bitmap("../../assets/bitmaps/abc.png");
+	personagem.personagemBaixo= al_load_bitmap("../../assets/bitmaps/personagemBaixo.png");
+	personagem.personagemCima = al_load_bitmap("../../assets/bitmaps/personagemCima.png");
+	personagem.personagemEsquerda = al_load_bitmap("../../assets/bitmaps/personagemEsquerda.png");
+	personagem.personagemDireita = al_load_bitmap("../../assets/bitmaps/personagemDireita.png");
 	personagem.personagemPosicaoX = 40;
 	personagem.personagemPosicaoY = 40;
 
 	bitmapChao = al_load_bitmap("../../assets/bitmaps/chao.png");
 	bitmapParede = al_load_bitmap("../../assets/bitmaps/parede.png");
+	bitmapPorta = al_load_bitmap("../../assets/bitmaps/porta.png");
 	bitmapDica = al_load_bitmap("../../assets/bitmaps/dica.png");
-	bitmapSemDica = al_load_bitmap("../../assets/bitmaps/semDica.png");
 	bitmapPoder = al_load_bitmap("../../assets/bitmaps/poder.png");
-
+	bitmapPlacar = al_load_bitmap("../../assets/bitmaps/placar.png");
+	bitmapPlacarL = al_load_bitmap("../../assets/bitmaps/L.png");
+	bitmapPlacarI = al_load_bitmap("../../assets/bitmaps/I.png");
+	bitmapPlacarB = al_load_bitmap("../../assets/bitmaps/B.png");
+	bitmapPlacarR = al_load_bitmap("../../assets/bitmaps/R.png");
+	bitmapPlacarA = al_load_bitmap("../../assets/bitmaps/A.png");
 
 	leMapa(&mapa);
 
 	registraEventosNaFila(filaEventos, display, timer);
 
-	desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapDica, bitmapPoder);
-	desenhaPersonagem(&personagem,personagem.personagemPosicaoX,personagem.personagemPosicaoY);
+	desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapPorta, bitmapDica, bitmapPoder, bitmapPlacar, bitmapPlacarL, bitmapPlacarI, bitmapPlacarB, bitmapPlacarR, bitmapPlacarA);
+	desenhaPersonagem(&personagem,personagem.personagemPosicaoX,personagem.personagemPosicaoY, 2);
 
 
 	while (1) {
@@ -69,7 +88,7 @@ int main(){
 		al_flip_display();
 
 
-		desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapDica, bitmapPoder);
+		desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapPorta, bitmapDica, bitmapPoder, bitmapPlacar, bitmapPlacarL, bitmapPlacarI, bitmapPlacarB, bitmapPlacarR, bitmapPlacarA);
 
 		ALLEGRO_EVENT evento;
 		

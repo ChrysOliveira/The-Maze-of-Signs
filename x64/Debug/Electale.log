@@ -1,8 +1,10 @@
 ﻿  Electale.c
-  Personagem.c
-C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\src\Source Files\Personagem.c(30,3): warning C4013: 'ehDica' indefinido; assumindo extern retornando int
-C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\src\Source Files\Personagem.c(31,3): warning C4013: 'ehPoder' indefinido; assumindo extern retornando int
+C:\Users\Arkivo\Documents\GitHub\jogoBCC\src\Source Files\Electale.c(83,93): warning C4020: 'desenhaPersonagem': muitos parâmetros reais
+C:\Users\Arkivo\Documents\GitHub\jogoBCC\src\Source Files\Electale.c(44,18): warning C4101: 'personagemBaixo': variável local não referenciada
+C:\Users\Arkivo\Documents\GitHub\jogoBCC\src\Source Files\Electale.c(46,18): warning C4101: 'personagemEsqueda': variável local não referenciada
+C:\Users\Arkivo\Documents\GitHub\jogoBCC\src\Source Files\Electale.c(45,18): warning C4101: 'personagemCima': variável local não referenciada
+C:\Users\Arkivo\Documents\GitHub\jogoBCC\src\Source Files\Electale.c(47,18): warning C4101: 'personagemDireita': variável local não referenciada
   mapa.c
-C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\src\Source Files\mapa.c(86,37): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
+C:\Users\Arkivo\Documents\GitHub\jogoBCC\src\Source Files\mapa.c(118,37): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
   Gerando Código...
-  Electale.vcxproj -> C:\Users\grazi\OneDrive\Documentos\GitHub\jogoBCC\x64\Debug\Electale.exe
+  Electale.vcxproj -> C:\Users\Arkivo\Documents\GitHub\jogoBCC\x64\Debug\Electale.exe
