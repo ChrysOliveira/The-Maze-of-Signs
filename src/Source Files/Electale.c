@@ -5,6 +5,9 @@
 #include "../Header Files/Electale.h"
 #include "../Header Files/Personagem.h"
 
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+
 void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer, Mapa mapa) {
 	al_uninstall_keyboard();
 	al_destroy_display(display);
@@ -20,8 +23,22 @@ void registraEventosNaFila(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* display,
 	al_register_event_source(queue, al_get_timer_event_source(timer));
 }
 
-int main(){
+void desenhaMenu(ALLEGRO_BITMAP *fundo, ALLEGRO_FONT *fonte) {
 
+	while (1)
+	{
+		al_flip_display();
+
+		al_draw_scaled_bitmap(fundo, 0, 0, 1280, 960, 0, 0, 1280, 960, 0);
+
+		al_draw_text(fonte, al_map_rgb(255, 255, 255), 640, 580, ALLEGRO_ALIGN_CENTER, "Press Enter to start");
+		al_draw_text(fonte, al_map_rgb(255, 255, 255), 640, 680, ALLEGRO_ALIGN_CENTER, "Press E to exit");
+
+	}
+
+}
+
+int main(){
 	Personagem personagem;
 	Mapa mapa;
 
@@ -37,18 +54,22 @@ int main(){
 	ALLEGRO_BITMAP* bitmapPlacarR;
 	ALLEGRO_BITMAP* bitmapPlacarA;
 	ALLEGRO_DISPLAY* display;
-	ALLEGRO_EVENT_QUEUE * filaEventos;
+	ALLEGRO_EVENT_QUEUE* filaEventos;
 	ALLEGRO_TIMER* timer;
 	ALLEGRO_KEYBOARD_STATE keyboardState;
+	ALLEGRO_BITMAP* fundo;
+	ALLEGRO_FONT* fonte = NULL;
 
 	ALLEGRO_BITMAP* personagemBaixo;
 	ALLEGRO_BITMAP* personagemCima;
 	ALLEGRO_BITMAP* personagemEsqueda;
 	ALLEGRO_BITMAP* personagemDireita;
-	
+
 	al_init();
 	al_init_image_addon();
 	al_install_keyboard();
+	al_init_font_addon();
+	al_init_ttf_addon();
 
 	display = al_create_display(1280, 960);
 
@@ -56,7 +77,7 @@ int main(){
 
 	timer = al_create_timer(1 / 60.0);
 
-	personagem.personagemBaixo= al_load_bitmap("../../assets/bitmaps/personagemBaixo.png");
+	personagem.personagemBaixo = al_load_bitmap("../../assets/bitmaps/personagemBaixo.png");
 	personagem.personagemCima = al_load_bitmap("../../assets/bitmaps/personagemCima.png");
 	personagem.personagemEsquerda = al_load_bitmap("../../assets/bitmaps/personagemEsquerda.png");
 	personagem.personagemDireita = al_load_bitmap("../../assets/bitmaps/personagemDireita.png");
@@ -74,24 +95,29 @@ int main(){
 	bitmapPlacarB = al_load_bitmap("../../assets/bitmaps/B.png");
 	bitmapPlacarR = al_load_bitmap("../../assets/bitmaps/R.png");
 	bitmapPlacarA = al_load_bitmap("../../assets/bitmaps/A.png");
+	fundo = al_load_bitmap("../../assets/bitmaps/menuImg.png");
+	fonte = al_load_font("../../assets/fonte/fonte.ttf", 48, 0);
+
+
+
 
 	leMapa(&mapa);
 
 	registraEventosNaFila(filaEventos, display, timer);
 
 	desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapPorta, bitmapDica, bitmapPoder, bitmapPlacar, bitmapPlacarL, bitmapPlacarI, bitmapPlacarB, bitmapPlacarR, bitmapPlacarA);
-	desenhaPersonagem(&personagem,personagem.personagemPosicaoX,personagem.personagemPosicaoY, 2);
-
+	desenhaMenu(fundo, fonte);
+	desenhaPersonagem(&personagem, personagem.personagemPosicaoX, personagem.personagemPosicaoY, 2);
 
 	while (1) {
 
 		al_flip_display();
 
-
+		
 		desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapPorta, bitmapDica, bitmapPoder, bitmapPlacar, bitmapPlacarL, bitmapPlacarI, bitmapPlacarB, bitmapPlacarR, bitmapPlacarA);
 
 		ALLEGRO_EVENT evento;
-		
+
 		al_get_keyboard_state(&keyboardState);
 
 		al_wait_for_event(filaEventos, &evento);
@@ -101,8 +127,9 @@ int main(){
 		}
 
 		movimenta(&mapa, keyboardState, &personagem);
+
 	}
-	
+
 	removeComponentes(display, &personagem, filaEventos, timer, mapa);
 	
 }
