@@ -66,7 +66,7 @@ void desenhaMapa(Mapa*mapa, ALLEGRO_BITMAP *chao, ALLEGRO_BITMAP*parede, ALLEGRO
 			case PODER:
 				al_draw_scaled_bitmap(poder, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
 			
-				break;
+			break;
 			}
 			destinoX += 40;
 		}

@@ -29,7 +29,6 @@ int main(){
 	Mapa mapa;
 	Monstro monstros;
 	ALLEGRO_BITMAP* bitmapMapa;
-
 	ALLEGRO_BITMAP* bitmapChao;
 	ALLEGRO_BITMAP* bitmapParede;
 	ALLEGRO_BITMAP* bitmapDica;
@@ -62,6 +61,7 @@ int main(){
 	bitmapDica = al_load_bitmap("../../assets/bitmaps/dica.png");
 	bitmapSemDica = al_load_bitmap("../../assets/bitmaps/semDica.png");
 	bitmapPoder = al_load_bitmap("../../assets/bitmaps/poder.png");
+
 
 	leMapa(&mapa);
 

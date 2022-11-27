@@ -58,6 +58,7 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 
 	}
+
 }
 
 void desenhaPersonagem(Personagem * personagem, int posicaoX, int posicaoY) {
