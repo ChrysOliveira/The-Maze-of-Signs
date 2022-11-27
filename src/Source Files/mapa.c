@@ -115,13 +115,10 @@ int ehParede(Mapa * mapa, int posicaoX, int posicaoY) {
 	if (mapa->matriz[x][y] != PAREDE && mapa->matriz[x][y] != PORTA && mapa->matriz[x][y] != PLACAR && mapa->matriz[x][y] != PLACAR_L && mapa->matriz[x][y] != PLACAR_I && mapa->matriz[x][y] != PLACAR_B && mapa->matriz[x][y] != PLACAR_R && mapa->matriz[x][y] != PLACAR_A) {
 		return 0;
 	}
-	else if (mapa->matriz[x][y] == NULL) {
-		return 0;
-	}
 	
 	return 1;
 }
-//assim que o personagem passar, irá trocar o valor na matriz de 3 para 0
+//assim que o personagem passar, irï¿½ trocar o valor na matriz de 3 para 0
 void ehDica(Mapa* mapa, int posicaoX, int posicaoY) {
 	int x = posicaoY / 40;
 	int y = posicaoX / 40;
@@ -213,7 +210,7 @@ void ehDica(Mapa* mapa, int posicaoX, int posicaoY) {
 	}
 }
 
-//assim que o personagem passar, irá trocar o valor na matriz de 5 para 0
+//assim que o personagem passar, irï¿½ trocar o valor na matriz de 5 para 0
 void ehPoder(Mapa* mapa, int posicaoX, int posicaoY) {
 	int x = posicaoY / 40;
 	int y = posicaoX / 40;

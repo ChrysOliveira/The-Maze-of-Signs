@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="src\Source Files\mapa.c" />
     <ClCompile Include="src\Source Files\Electale.c" />
+    <ClCompile Include="src\Source Files\Menu.c" />
     <ClCompile Include="src\Source Files\Personagem.c" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Header Files\mapa.h" />
+    <ClInclude Include="src\Header Files\Menu.h" />
     <ClInclude Include="src\Header Files\Personagem.h" />
     <ClInclude Include="src\Header Files\Electale.h" />
   </ItemGroup>

@@ -16,6 +16,6 @@ struct Personagem {
 };
 
 void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem);
-void desenhaPersonagem(Personagem* personagem, int posicaoX, int posicaoY);
+void desenhaPersonagem(Personagem* personagem, int posicaoX, int posicaoY, int direcao);
 
 

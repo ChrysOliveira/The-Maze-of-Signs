@@ -1,6 +1,5 @@
 #pragma once
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_image.h>
 
 #define CHAO '0'
 #define PAREDE '1'
@@ -33,4 +32,5 @@ void liberaMapa(Mapa * mapa);
 void leMapa(Mapa * mapa);
 void desenhaMapa(Mapa*mapa, ALLEGRO_BITMAP *chao, ALLEGRO_BITMAP *parede, ALLEGRO_BITMAP*porta, ALLEGRO_BITMAP *dica, ALLEGRO_BITMAP *poder , ALLEGRO_BITMAP* Placar, ALLEGRO_BITMAP* PlacarL, ALLEGRO_BITMAP* PlacarI, ALLEGRO_BITMAP* PlacarB, ALLEGRO_BITMAP* PlacarR, ALLEGRO_BITMAP* PlacarA);
 int ehParede(Mapa* mapa, int posicaoX, int posicaoY);
-
+void ehDica(Mapa* mapa, int posicaoX, int posicaoY);
+void ehPoder(Mapa* mapa, int posicaoX, int posicaoY);

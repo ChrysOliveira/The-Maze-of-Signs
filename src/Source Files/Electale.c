@@ -1,12 +1,12 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_font.h>
+
 #include "../Header Files/Electale.h"
 #include "../Header Files/Personagem.h"
-
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
+#include "../Header Files/Menu.h"
 
 void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer, Mapa mapa) {
 	al_uninstall_keyboard();
@@ -21,21 +21,6 @@ void registraEventosNaFila(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* display,
 	al_register_event_source(queue, al_get_keyboard_event_source());
 	al_register_event_source(queue, al_get_display_event_source(display));
 	al_register_event_source(queue, al_get_timer_event_source(timer));
-}
-
-void desenhaMenu(ALLEGRO_BITMAP *fundo, ALLEGRO_FONT *fonte) {
-
-	while (1)
-	{
-		al_flip_display();
-
-		al_draw_scaled_bitmap(fundo, 0, 0, 1280, 960, 0, 0, 1280, 960, 0);
-
-		al_draw_text(fonte, al_map_rgb(255, 255, 255), 640, 580, ALLEGRO_ALIGN_CENTER, "Press Enter to start");
-		al_draw_text(fonte, al_map_rgb(255, 255, 255), 640, 680, ALLEGRO_ALIGN_CENTER, "Press E to exit");
-
-	}
-
 }
 
 int main(){
@@ -97,22 +82,42 @@ int main(){
 	bitmapPlacarA = al_load_bitmap("../../assets/bitmaps/A.png");
 	fundo = al_load_bitmap("../../assets/bitmaps/menuImg.png");
 	fonte = al_load_font("../../assets/fonte/fonte.ttf", 48, 0);
-
-
-
-
+	
 	leMapa(&mapa);
-
 	registraEventosNaFila(filaEventos, display, timer);
+	
+	desenhaMenu(fundo, fonte);
+	al_flip_display();
+
+	while (1)
+	{
+		ALLEGRO_EVENT evento;
+
+		al_get_keyboard_state(&keyboardState);
+		al_wait_for_event(filaEventos, &evento);
+
+		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+			exit(1);
+		}
+
+		if (al_key_down(&keyboardState, ALLEGRO_KEY_ENTER))
+		{
+			break;
+		}
+
+		if (al_key_down(&keyboardState, ALLEGRO_KEY_E))
+		{
+			exit(1);
+		}
+
+	}
 
 	desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapPorta, bitmapDica, bitmapPoder, bitmapPlacar, bitmapPlacarL, bitmapPlacarI, bitmapPlacarB, bitmapPlacarR, bitmapPlacarA);
-	desenhaMenu(fundo, fonte);
 	desenhaPersonagem(&personagem, personagem.personagemPosicaoX, personagem.personagemPosicaoY, 2);
-
+	
 	while (1) {
 
 		al_flip_display();
-
 		
 		desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapPorta, bitmapDica, bitmapPoder, bitmapPlacar, bitmapPlacarL, bitmapPlacarI, bitmapPlacarB, bitmapPlacarR, bitmapPlacarA);
 
