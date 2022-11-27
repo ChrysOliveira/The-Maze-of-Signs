@@ -44,7 +44,7 @@ void localizaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
                     monstros[contLoop].posicaoX = j*40;
                     monstros[contLoop].posicaoY =  i*40;
                     monstros[contLoop].direcao = rand() % 5;
-                    monstros[contLoop].monstroBitmap = al_load_bitmap("../../assets/bitmaps/fantasma.png");
+                    monstros[contLoop].monstroBitmap = al_load_bitmap("../../assets/bitmaps/Monstro.png");
                     contLoop++;
                 }
             }
@@ -67,6 +67,14 @@ void desalocaMonstros(Monstro * monstros)
 
 void movimentaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
 {
+    for (int i = 0; i < mapa->qntLinhas; i++)
+    {
+        for (int j = 0; j < mapa->qntColunas; j++) {
+            if (mapa->matriz[i][j] == MONSTRO)
+                mapa->matriz[i][j] = CHAO;
+        }
+    }
+
 
     for (int i = 0; i < qntMonstros; i++)
     {        
