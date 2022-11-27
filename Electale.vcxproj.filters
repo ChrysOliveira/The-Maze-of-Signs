@@ -28,8 +28,8 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="README.md" />
-    <None Include="packages.config" />
     <None Include=".gitattributes" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Header Files\Electale.h">
