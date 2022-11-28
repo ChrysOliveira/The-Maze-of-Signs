@@ -98,6 +98,7 @@ int main(){
 
 	
 	int game = 0;
+	int tempoComPoder = 0;
 	while (1) {
 
 		if (game == 0)
@@ -164,11 +165,32 @@ int main(){
 			al_get_keyboard_state(&keyboardState);
 			movimenta(&mapa, keyboardState, &personagem, bitmapChao);
 			movimentaMonstros(&mapa,&monstros,qntMonstros);
-			if(ehMonstro(&mapa,personagem.personagemPosicaoX,personagem.personagemPosicaoY) && personagem.estaComPoder == 0)
+			
+			if(ehPoder(&mapa,personagem.personagemPosicaoX,personagem.personagemPosicaoY))
 			{
-				personagem.personagemPosicaoX = 40;
-				personagem.personagemPosicaoY = 40;
-				game = 0;
+				desenhaChao(&mapa,personagem.personagemPosicaoX, personagem.personagemPosicaoY);
+				personagem.estaComPoder = 1;
+			}
+			
+			if(ehMonstro(&mapa,personagem.personagemPosicaoX,personagem.personagemPosicaoY))
+			{
+				if(personagem.estaComPoder == 0)
+				{
+					personagem.personagemPosicaoX = 40;
+					personagem.personagemPosicaoY = 40;
+					game = 0;
+				}
+			}
+
+			if(personagem.estaComPoder)
+			{
+				tempoComPoder++;
+			}
+
+			if(tempoComPoder == 600)
+			{
+				personagem.estaComPoder = 0;
+				tempoComPoder = 0;
 			}
 		}
 	}

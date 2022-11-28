@@ -1,8 +1,8 @@
 #include <allegro5/allegro.h>
 #include "../Header Files/Personagem.h"
 
-void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem, ALLEGRO_BITMAP * bitmapChao) {
-	
+void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem, ALLEGRO_BITMAP * bitmapChao)
+{
 	if (al_key_down(&keyboardState, ALLEGRO_KEY_UP)) {
 		
 		if (!ehParede(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY - 1)) {
@@ -13,12 +13,7 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 		else {
 			personagem->direcaoBitmap = 1;
 			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
-		}
-
-
-		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
-		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
-	
+		}	
 	}
 	else if (al_key_down(&keyboardState, ALLEGRO_KEY_DOWN)) {
 		
@@ -31,9 +26,6 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 			personagem->direcaoBitmap = 2;
 			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
-
-		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
-		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 	}
 	else if (al_key_down(&keyboardState, ALLEGRO_KEY_LEFT)) {
 
@@ -46,9 +38,6 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 			personagem->direcaoBitmap = 3;
 			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
-
-		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
-		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 	}
 	else if (al_key_down(&keyboardState, ALLEGRO_KEY_RIGHT)) {
 
@@ -61,15 +50,12 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 			personagem->direcaoBitmap = 4;
 			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
-
-		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
-		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 	}else
 	{
-		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
-		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 	}
+
+	ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 }
 
 void desenhaPersonagem(Personagem * personagem, int posicaoX, int posicaoY, int direcao) {

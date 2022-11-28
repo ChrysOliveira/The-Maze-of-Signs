@@ -34,5 +34,6 @@ void leMapa(Mapa * mapa);
 void desenhaMapa(Mapa*mapa, ALLEGRO_BITMAP *chao, ALLEGRO_BITMAP *parede, ALLEGRO_BITMAP*porta, ALLEGRO_BITMAP *dica, ALLEGRO_BITMAP *poder , ALLEGRO_BITMAP* Placar, ALLEGRO_BITMAP* PlacarL, ALLEGRO_BITMAP* PlacarI, ALLEGRO_BITMAP* PlacarB, ALLEGRO_BITMAP* PlacarR, ALLEGRO_BITMAP* PlacarA);
 int ehParede(Mapa* mapa, int posicaoX, int posicaoY);
 void ehDica(Mapa* mapa, int posicaoX, int posicaoY);
-void ehPoder(Mapa* mapa, int posicaoX, int posicaoY);
+int ehPoder(Mapa* mapa, int posicaoX, int posicaoY);
 int ehMonstro(Mapa* mapa, int posicaoX, int posicaoY);
+void desenhaChao(Mapa* mapa, int posicaoX, int posicaoY);
