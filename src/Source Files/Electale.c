@@ -50,11 +50,6 @@ int main(){
 	ALLEGRO_BITMAP* fundo;
 	ALLEGRO_FONT* fonte = NULL;
 
-	ALLEGRO_BITMAP* personagemBaixo;
-	ALLEGRO_BITMAP* personagemCima;
-	ALLEGRO_BITMAP* personagemEsqueda;
-	ALLEGRO_BITMAP* personagemDireita;
-
 	al_init();
 	al_init_image_addon();
 	al_install_keyboard();
@@ -76,6 +71,8 @@ int main(){
 	personagem.personagemDireita = al_load_bitmap("../../assets/bitmaps/personagemDireita.png");
 	personagem.personagemPosicaoX = 40;
 	personagem.personagemPosicaoY = 40;
+	personagem.direcaoBitmap = 1;
+	personagem.estaComPoder = 0;
 
 	bitmapChao = al_load_bitmap("../../assets/bitmaps/chao.png");
 	bitmapParede = al_load_bitmap("../../assets/bitmaps/parede.png");
@@ -94,46 +91,58 @@ int main(){
 	leMapa(&mapa);
 	registraEventosNaFila(filaEventos, display, timer);
 	
-	desenhaMenu(fundo, fonte);
-	al_flip_display();
-
-	while (1)
-	{
-		ALLEGRO_EVENT evento;
-
-		al_get_keyboard_state(&keyboardState);
-		al_wait_for_event(filaEventos, &evento);
-
-		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-			exit(1);
-		}
-	//pega a qnt de monstros no mapa
 	int qntMonstros = quantidadeMonstros(&mapa);
-	//grava as posicoes dos monstros
 	alocaMonstros(&monstros, qntMonstros);
-	localizaMonstros(&mapa,&monstros,qntMonstros);	
-
-	registraEventosNaFila(filaEventos, display, timer);
-
-		if (al_key_down(&keyboardState, ALLEGRO_KEY_ENTER))
-		{
-			break;
-		}
-
-		if (al_key_down(&keyboardState, ALLEGRO_KEY_E))
-		{
-			exit(1);
-		}
-
-	}
-
-	desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapPorta, bitmapDica, bitmapPoder, bitmapPlacar, bitmapPlacarL, bitmapPlacarI, bitmapPlacarB, bitmapPlacarR, bitmapPlacarA);
-	desenhaPersonagem(&personagem, personagem.personagemPosicaoX, personagem.personagemPosicaoY, 2);
+	localizaMonstros(&mapa,&monstros,qntMonstros);
 	
+
 	
-	desenhaMonstros(&monstros, qntMonstros);
+	int game = 0;
 	while (1) {
+
+		if (game == 0)
+		{
+			desenhaMenu(fundo, fonte);
+			al_flip_display();
+
+			while (1)
+			{
+				ALLEGRO_EVENT evento;
+
+				al_get_keyboard_state(&keyboardState);
+				al_wait_for_event(filaEventos, &evento);
+
+				if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+				{
+					exit(1);
+				}
+
+				registraEventosNaFila(filaEventos, display, timer);
+
+				if (al_key_down(&keyboardState, ALLEGRO_KEY_ENTER))
+				{
+					game = 1;
+					desenhaMapa(&mapa, bitmapChao, bitmapParede,
+								bitmapPorta, bitmapDica, bitmapPoder,
+								bitmapPlacar, bitmapPlacarL,
+								bitmapPlacarI, bitmapPlacarB,
+								bitmapPlacarR, bitmapPlacarA);
 	
+					desenhaPersonagem(&personagem, personagem.personagemPosicaoX, personagem.personagemPosicaoY, personagem.direcaoBitmap);
+					desenhaMonstros(&monstros, qntMonstros);
+
+					break;
+				}
+
+				if (al_key_down(&keyboardState, ALLEGRO_KEY_E))
+				{
+					exit(1);
+				}
+			}
+		}
+		
+		al_flip_display();
+
 		ALLEGRO_EVENT evento;
 		
 		al_wait_for_event(filaEventos, &evento);
@@ -145,14 +154,22 @@ int main(){
 
 		if(evento.type == ALLEGRO_EVENT_TIMER)
 		{
-			desenhaMapa(&mapa, bitmapChao, bitmapParede, bitmapDica, bitmapPoder);
+			desenhaMapa(&mapa,bitmapChao,
+				bitmapParede,bitmapPorta,
+				bitmapDica,bitmapPoder,
+				bitmapPlacar,bitmapPlacarL,
+				bitmapPlacarI,bitmapPlacarB,
+				bitmapPlacarR,bitmapPlacarA);
 
 			al_get_keyboard_state(&keyboardState);
-			movimentaMonstros(&mapa,&monstros,qntMonstros);
 			movimenta(&mapa, keyboardState, &personagem, bitmapChao);
-			
-			al_flip_display();
-
+			movimentaMonstros(&mapa,&monstros,qntMonstros);
+			if(ehMonstro(&mapa,personagem.personagemPosicaoX,personagem.personagemPosicaoY) && personagem.estaComPoder == 0)
+			{
+				personagem.personagemPosicaoX = 40;
+				personagem.personagemPosicaoY = 40;
+				game = 0;
+			}
 		}
 	}
 	

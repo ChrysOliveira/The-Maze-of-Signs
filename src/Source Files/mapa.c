@@ -57,6 +57,9 @@ void desenhaMapa(Mapa* mapa, ALLEGRO_BITMAP* chao, ALLEGRO_BITMAP* parede, ALLEG
 			case CHAO:
 				al_draw_scaled_bitmap(chao, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
 			break;
+			case MONSTRO:
+				al_draw_scaled_bitmap(chao, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
+				break;
 			case PAREDE:
 				al_draw_scaled_bitmap(parede, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
 			break;
@@ -219,4 +222,15 @@ void ehPoder(Mapa* mapa, int posicaoX, int posicaoY) {
 		mapa->matriz[x][y] = CHAO;
 
 	}
+}
+
+int ehMonstro(Mapa* mapa, int posicaoX, int posicaoY) {
+	int x = posicaoY / 40;
+	int y = posicaoX / 40;
+
+	if (mapa->matriz[x][y] == MONSTRO) {
+		return 1;
+	}
+
+	return 0;
 }

@@ -16,6 +16,7 @@
 #define PLACAR_R '8'
 #define PLACAR_A '9'
 #define PODER '5'
+#define MONSTRO 'M'
 
 
 
@@ -34,3 +35,4 @@ void desenhaMapa(Mapa*mapa, ALLEGRO_BITMAP *chao, ALLEGRO_BITMAP *parede, ALLEGR
 int ehParede(Mapa* mapa, int posicaoX, int posicaoY);
 void ehDica(Mapa* mapa, int posicaoX, int posicaoY);
 void ehPoder(Mapa* mapa, int posicaoX, int posicaoY);
+int ehMonstro(Mapa* mapa, int posicaoX, int posicaoY);

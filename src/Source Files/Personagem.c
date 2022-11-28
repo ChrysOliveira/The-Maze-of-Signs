@@ -2,22 +2,19 @@
 #include "../Header Files/Personagem.h"
 
 void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* personagem, ALLEGRO_BITMAP * bitmapChao) {
-
-	int pos = 0;
-
+	
 	if (al_key_down(&keyboardState, ALLEGRO_KEY_UP)) {
 		
 		if (!ehParede(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY - 1)) {
 			personagem->personagemPosicaoY -= 10;
-			pos = 1;
-			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, pos);
+			personagem->direcaoBitmap = 1;
+			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
 		else {
-			pos = 1;
-			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, pos);
+			personagem->direcaoBitmap = 1;
+			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
 
-		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 
 		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
@@ -27,12 +24,12 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 		
 		if (!ehParede(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY + 41)) {
 			personagem->personagemPosicaoY += 10;
-			pos = 2;
-			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, pos);
+			personagem->direcaoBitmap = 2;
+			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
 		else {
-			pos = 2;
-			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, pos);
+			personagem->direcaoBitmap = 2;
+			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
 
 		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
@@ -42,12 +39,12 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 
 		if (!ehParede(mapa, personagem->personagemPosicaoX - 1, personagem->personagemPosicaoY)) {
 			personagem->personagemPosicaoX -= 10;
-			pos = 3;
-			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, pos);
+			personagem->direcaoBitmap = 3;
+			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
 		else {
-			pos = 3;
-			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, pos);
+			personagem->direcaoBitmap = 3;
+			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
 
 		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
@@ -57,25 +54,22 @@ void movimenta(Mapa* mapa, ALLEGRO_KEYBOARD_STATE keyboardState, Personagem* per
 
 		if (!ehParede(mapa, personagem->personagemPosicaoX + 41, personagem->personagemPosicaoY)) {
 			personagem->personagemPosicaoX += 10;
-			pos = 4;
-			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, pos);
+			personagem->direcaoBitmap = 4;
+			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
 		else {
-			pos = 4;
-			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, pos);
+			personagem->direcaoBitmap = 4;
+			desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 		}
 
 		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 	}else
 	{
-		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
-
 		ehDica(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
 		ehPoder(mapa, personagem->personagemPosicaoX, personagem->personagemPosicaoY);
-
+		desenhaPersonagem(personagem, personagem->personagemPosicaoX, personagem->personagemPosicaoY, personagem->direcaoBitmap);
 	}
-
 }
 
 void desenhaPersonagem(Personagem * personagem, int posicaoX, int posicaoY, int direcao) {

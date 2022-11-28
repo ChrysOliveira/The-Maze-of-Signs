@@ -17,3 +17,4 @@ void desenhaMonstros(Monstro * monstros, int qntMonstros);
 void alocaMonstros(Monstro * monstros, int qntMonstros);
 void desalocaMonstros(Monstro * monstros);
 void movimentaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros);
+void marcaMonstros(Mapa * mapa , Monstro * monstros, int qntMonstros);

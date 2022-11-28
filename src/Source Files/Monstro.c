@@ -1,7 +1,8 @@
 ﻿#include <stdlib.h>
 #include <stdio.h>
-#include "../Header Files/mapa.h"
 #include <allegro5/allegro.h>
+
+#include "../Header Files/mapa.h"
 #include "../Header Files/mapa.h"
 #include "../Header Files/Monstro.h"
 
@@ -44,7 +45,7 @@ void localizaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
                     monstros[contLoop].posicaoX = j*40;
                     monstros[contLoop].posicaoY =  i*40;
                     monstros[contLoop].direcao = rand() % 5;
-                    monstros[contLoop].monstroBitmap = al_load_bitmap("../../assets/bitmaps/Monstro.png");
+                    monstros[contLoop].monstroBitmap = al_load_bitmap("../../assets/bitmaps/monstro.png");
                     contLoop++;
                 }
             }
@@ -65,6 +66,20 @@ void desalocaMonstros(Monstro * monstros)
     free(monstros);
 }
 
+void marcaMonstros(Mapa * mapa , Monstro * monstros, int qntMonstros)
+{
+    for (int i = 0; i < qntMonstros; ++i)
+    {
+        int x = monstros[i].posicaoY / 40;
+        int y = monstros[i].posicaoX / 40;
+
+        if(mapa->matriz[x][y] == CHAO)
+        {
+            mapa->matriz[x][y] = MONSTRO;
+        }
+    }
+}
+
 void movimentaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
 {
     for (int i = 0; i < mapa->qntLinhas; i++)
@@ -75,46 +90,45 @@ void movimentaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
         }
     }
 
-
     for (int i = 0; i < qntMonstros; i++)
-    {        
+    {
         switch (monstros[i].direcao)
         {
         case 1:
-                if (!ehParede(mapa, monstros[i].posicaoX, monstros[i].posicaoY - 1)) {
-                    monstros[i].posicaoY -= 10;
+            if (!ehParede(mapa, monstros[i].posicaoX, monstros[i].posicaoY - 1)) {
+                monstros[i].posicaoY -= 10;
                   
-                } else
-                {
-                    monstros[i].direcao = rand() % 5;
-                }
-                break;
+            } else
+            {
+                monstros[i].direcao = rand() % 5;
+            }
+            break;
         case 2:
-                if (!ehParede(mapa, monstros[i].posicaoX, monstros[i].posicaoY + 41)) {
-                    monstros[i].posicaoY += 10;
+            if (!ehParede(mapa, monstros[i].posicaoX, monstros[i].posicaoY + 41)) {
+                monstros[i].posicaoY += 10;
                  
-                } else
-                {
-                    monstros[i].direcao = rand() % 5;
-                }
-                break;
+            } else
+            {
+                monstros[i].direcao = rand() % 5;
+            }
+            break;
         case 3:
-                if (!ehParede(mapa, monstros[i].posicaoX-1, monstros[i].posicaoY)) {
-                    monstros[i].posicaoX -= 10;
+            if (!ehParede(mapa, monstros[i].posicaoX-1, monstros[i].posicaoY)) {
+                monstros[i].posicaoX -= 10;
                  
-                } else
-                {
-                    monstros[i].direcao = rand() % 5;
-                }
-                break;
+            } else
+            {
+                monstros[i].direcao = rand() % 5;
+            }
+            break;
         case 4:
-                if (!ehParede(mapa, monstros[i].posicaoX + 41, monstros[i].posicaoY)) {
-                    monstros[i].posicaoX += 10;
+            if (!ehParede(mapa, monstros[i].posicaoX + 41, monstros[i].posicaoY)) {
+                monstros[i].posicaoX += 10;
                   
-                } else
-                {
-                    monstros[i].direcao = rand() % 5;
-                }
+            } else
+            {
+                monstros[i].direcao = rand() % 5;
+            }
             break;
         default:
             monstros[i].direcao = rand() % 5;
@@ -122,4 +136,6 @@ void movimentaMonstros(Mapa * mapa, Monstro * monstros, int qntMonstros)
         }
     }
         desenhaMonstros(monstros, qntMonstros);
+        marcaMonstros(mapa, monstros, qntMonstros);
 }
+
