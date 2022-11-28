@@ -10,6 +10,7 @@
 #include "../Header Files/Personagem.h"
 #include "../Header Files/Monstro.h"
 #include "../Header Files/Menu.h"
+#include "../Header Files/Intro.h"
 
 void removeComponentes(ALLEGRO_DISPLAY* display,Personagem* personagem,ALLEGRO_EVENT_QUEUE* queue,ALLEGRO_TIMER* timer, Mapa mapa, Monstro * monstros) {
 	al_uninstall_keyboard();
@@ -48,6 +49,7 @@ int main(){
 	ALLEGRO_TIMER* timer;
 	ALLEGRO_KEYBOARD_STATE keyboardState;
 	ALLEGRO_BITMAP* fundo;
+	ALLEGRO_BITMAP* img;
 	ALLEGRO_FONT* fonte = NULL;
 
 	al_init();
@@ -86,6 +88,7 @@ int main(){
 	bitmapPlacarR = al_load_bitmap("../../assets/bitmaps/R.png");
 	bitmapPlacarA = al_load_bitmap("../../assets/bitmaps/A.png");
 	fundo = al_load_bitmap("../../assets/bitmaps/menuImg.png");
+	img = al_load_bitmap("../../assets/bitmaps/img.png");
 	fonte = al_load_font("../../assets/fonte/fonte.ttf", 48, 0);
 	
 	leMapa(&mapa);
@@ -121,13 +124,16 @@ int main(){
 
 				if (al_key_down(&keyboardState, ALLEGRO_KEY_ENTER))
 				{
+					desenhaIntro(img, fonte);
+					al_flip_display();
+
 					game = 1;
 					desenhaMapa(&mapa, bitmapChao, bitmapParede,
-								bitmapPorta, bitmapDica, bitmapPoder,
-								bitmapPlacar, bitmapPlacarL,
-								bitmapPlacarI, bitmapPlacarB,
-								bitmapPlacarR, bitmapPlacarA);
-	
+						bitmapPorta, bitmapDica, bitmapPoder,
+						bitmapPlacar, bitmapPlacarL,
+						bitmapPlacarI, bitmapPlacarB,
+						bitmapPlacarR, bitmapPlacarA);
+
 					desenhaPersonagem(&personagem, personagem.personagemPosicaoX, personagem.personagemPosicaoY, personagem.direcaoBitmap);
 					desenhaMonstros(&monstros, qntMonstros);
 
