@@ -1,1 +1,5 @@
-.vs/*
+/packages/
+!packages/repositories.config
+.idea
+.vs
+x64/
