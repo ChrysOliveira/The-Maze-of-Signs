@@ -10,13 +10,16 @@
 #define DICA_B 'B'
 #define DICA_R 'R'
 #define DICA_A 'A'
+#define DICA_S 'S'
 #define PLACAR_L '3'
 #define PLACAR_I '4'
 #define PLACAR_B '7'
 #define PLACAR_R '8'
 #define PLACAR_A '9'
+#define PLACAR_S '2'
 #define PODER '5'
 #define MONSTRO 'M'
+#define VERIFICAR 'V'
 
 
 

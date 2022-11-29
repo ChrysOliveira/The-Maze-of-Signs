@@ -44,7 +44,7 @@ void leMapa(Mapa* mapa) {
 	fclose(f);
 }
 
-void desenhaMapa(Mapa* mapa, ALLEGRO_BITMAP* chao, ALLEGRO_BITMAP* parede, ALLEGRO_BITMAP* porta, ALLEGRO_BITMAP* dica, ALLEGRO_BITMAP* poder, ALLEGRO_BITMAP* Placar, ALLEGRO_BITMAP* PlacarL, ALLEGRO_BITMAP* PlacarI, ALLEGRO_BITMAP* PlacarB, ALLEGRO_BITMAP* PlacarR, ALLEGRO_BITMAP* PlacarA) {
+void desenhaMapa(Mapa* mapa, ALLEGRO_BITMAP* chao, ALLEGRO_BITMAP* parede, ALLEGRO_BITMAP* porta, ALLEGRO_BITMAP* dica, ALLEGRO_BITMAP* poder, ALLEGRO_BITMAP* Placar, ALLEGRO_BITMAP* PlacarL, ALLEGRO_BITMAP* PlacarI, ALLEGRO_BITMAP* PlacarB, ALLEGRO_BITMAP* PlacarR, ALLEGRO_BITMAP* PlacarA, ALLEGRO_BITMAP* PlacarS) {
 
 	int destinoX = 0;
 	int destinoY = 0;
@@ -57,6 +57,9 @@ void desenhaMapa(Mapa* mapa, ALLEGRO_BITMAP* chao, ALLEGRO_BITMAP* parede, ALLEG
 			case CHAO:
 				al_draw_scaled_bitmap(chao, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
 			break;
+			case VERIFICAR:
+				al_draw_scaled_bitmap(chao, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
+				break;
 			case MONSTRO:
 				al_draw_scaled_bitmap(chao, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
 				break;
@@ -81,6 +84,9 @@ void desenhaMapa(Mapa* mapa, ALLEGRO_BITMAP* chao, ALLEGRO_BITMAP* parede, ALLEG
 			case DICA_A:
 				al_draw_scaled_bitmap(dica, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
 			break;
+			case DICA_S:
+				al_draw_scaled_bitmap(dica, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
+			break;
 			case PLACAR_L:
 				al_draw_scaled_bitmap(PlacarL, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
 			break;
@@ -95,6 +101,9 @@ void desenhaMapa(Mapa* mapa, ALLEGRO_BITMAP* chao, ALLEGRO_BITMAP* parede, ALLEG
 			break;
 			case PLACAR_A:
 				al_draw_scaled_bitmap(PlacarA, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
+			break;
+			case PLACAR_S:
+				al_draw_scaled_bitmap(PlacarS, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
 			break;
 			case PODER:
 				al_draw_scaled_bitmap(poder, 0, 0, 40, 40, destinoX, destinoY, 40, 40, 0);
@@ -115,7 +124,7 @@ int ehParede(Mapa * mapa, int posicaoX, int posicaoY) {
 	int x =  posicaoY / 40;
 	int y = posicaoX / 40;
 
-	if (mapa->matriz[x][y] != PAREDE && mapa->matriz[x][y] != PORTA && mapa->matriz[x][y] != PLACAR && mapa->matriz[x][y] != PLACAR_L && mapa->matriz[x][y] != PLACAR_I && mapa->matriz[x][y] != PLACAR_B && mapa->matriz[x][y] != PLACAR_R && mapa->matriz[x][y] != PLACAR_A) {
+	if (mapa->matriz[x][y] != PAREDE && mapa->matriz[x][y] != PORTA && mapa->matriz[x][y] != PLACAR && mapa->matriz[x][y] != PLACAR_L && mapa->matriz[x][y] != PLACAR_I && mapa->matriz[x][y] != PLACAR_B && mapa->matriz[x][y] != PLACAR_R && mapa->matriz[x][y] != PLACAR_A && mapa->matriz[x][y] != PLACAR_S) {
 		return 0;
 	}
 	
@@ -210,6 +219,22 @@ void ehDica(Mapa* mapa, int posicaoX, int posicaoY) {
 			}
 		}
 		break;
+
+	case DICA_S:
+		mapa->matriz[x][y] = CHAO;
+		for (int i = 0; i < mapa->qntLinhas; i++) {
+			for (int j = 0; j < mapa->qntColunas; j++) {
+				if (mapa->matriz[i][j] == PLACAR) {
+					mapa->matriz[i][j] = PLACAR_S;
+					aux = 1;
+					break;
+				}
+			}
+			if (aux == 1) {
+				break;
+			}
+		}
+		break;
 	}
 }
 
@@ -234,3 +259,5 @@ int ehMonstro(Mapa* mapa, int posicaoX, int posicaoY) {
 
 	return 0;
 }
+
+

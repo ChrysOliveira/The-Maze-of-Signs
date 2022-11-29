@@ -27,7 +27,34 @@ void registraEventosNaFila(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* display,
 	al_register_event_source(queue, al_get_timer_event_source(timer));
 }
 
-int main(){
+
+void venceu(ALLEGRO_BITMAP* Venceu) {
+		al_flip_display();
+
+		al_draw_scaled_bitmap(venceu, 0, 0, 1280, 960, 0, 0, 1280, 960, 0);
+
+}
+
+int verificarPlacar(Mapa* mapa, int posicaoX, int posicaoY) {
+	int x = posicaoY / 40;
+	int y = posicaoX / 40;
+	int cont = 0;
+
+	if (mapa->matriz[x][y] == VERIFICAR) {
+		for (int i = 0; i <= 5; i++) {
+			if (mapa->matriz[0][i] != PLACAR) {
+				cont++;
+			}
+		}
+		if (cont == 6) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+
+int main() {
 	Personagem personagem;
 	Mapa mapa;
 	Monstro monstros;
@@ -43,6 +70,9 @@ int main(){
 	ALLEGRO_BITMAP* bitmapPlacarB;
 	ALLEGRO_BITMAP* bitmapPlacarR;
 	ALLEGRO_BITMAP* bitmapPlacarA;
+	ALLEGRO_BITMAP* bitmapPlacarS;
+	ALLEGRO_BITMAP* bitmapPergunta;
+	ALLEGRO_BITMAP* bitmapVenceu;
 	ALLEGRO_DISPLAY* display;
 	ALLEGRO_EVENT_QUEUE* filaEventos;
 	ALLEGRO_TIMER* timer;
@@ -85,18 +115,23 @@ int main(){
 	bitmapPlacarB = al_load_bitmap("../../assets/bitmaps/B.png");
 	bitmapPlacarR = al_load_bitmap("../../assets/bitmaps/R.png");
 	bitmapPlacarA = al_load_bitmap("../../assets/bitmaps/A.png");
+	bitmapPlacarS = al_load_bitmap("../../assets/bitmaps/S.png");
 	fundo = al_load_bitmap("../../assets/bitmaps/menuImg.png");
 	fonte = al_load_font("../../assets/fonte/fonte.ttf", 48, 0);
-	
+
+
+	bitmapPergunta = al_load_bitmap("../../assets/bitmaps/pergunta_final.png");
+	bitmapVenceu = al_load_bitmap("../../assets/bitmaps/MonstroFraco.png");
+
 	leMapa(&mapa);
 	registraEventosNaFila(filaEventos, display, timer);
-	
+
 	int qntMonstros = quantidadeMonstros(&mapa);
 	alocaMonstros(&monstros, qntMonstros);
-	localizaMonstros(&mapa,&monstros,qntMonstros);
-	
+	localizaMonstros(&mapa, &monstros, qntMonstros);
 
-	
+
+
 	int game = 0;
 	while (1) {
 
@@ -123,11 +158,11 @@ int main(){
 				{
 					game = 1;
 					desenhaMapa(&mapa, bitmapChao, bitmapParede,
-								bitmapPorta, bitmapDica, bitmapPoder,
-								bitmapPlacar, bitmapPlacarL,
-								bitmapPlacarI, bitmapPlacarB,
-								bitmapPlacarR, bitmapPlacarA);
-	
+						bitmapPorta, bitmapDica, bitmapPoder,
+						bitmapPlacar, bitmapPlacarL,
+						bitmapPlacarI, bitmapPlacarB,
+						bitmapPlacarR, bitmapPlacarA, bitmapPlacarS);
+
 					desenhaPersonagem(&personagem, personagem.personagemPosicaoX, personagem.personagemPosicaoY, personagem.direcaoBitmap);
 					desenhaMonstros(&monstros, qntMonstros);
 
@@ -140,39 +175,91 @@ int main(){
 				}
 			}
 		}
-		
+
 		al_flip_display();
 
 		ALLEGRO_EVENT evento;
-		
+
 		al_wait_for_event(filaEventos, &evento);
-		
+
 		if (evento.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			removeComponentes(display, &personagem, filaEventos, timer, mapa, &monstros);
 			exit(1);
 		}
 
-		if(evento.type == ALLEGRO_EVENT_TIMER)
+		if (evento.type == ALLEGRO_EVENT_TIMER)
 		{
-			desenhaMapa(&mapa,bitmapChao,
-				bitmapParede,bitmapPorta,
-				bitmapDica,bitmapPoder,
-				bitmapPlacar,bitmapPlacarL,
-				bitmapPlacarI,bitmapPlacarB,
-				bitmapPlacarR,bitmapPlacarA);
+			desenhaMapa(&mapa, bitmapChao,
+				bitmapParede, bitmapPorta,
+				bitmapDica, bitmapPoder,
+				bitmapPlacar, bitmapPlacarL,
+				bitmapPlacarI, bitmapPlacarB,
+				bitmapPlacarR, bitmapPlacarA, bitmapPlacarS);
 
 			al_get_keyboard_state(&keyboardState);
 			movimenta(&mapa, keyboardState, &personagem, bitmapChao);
-			movimentaMonstros(&mapa,&monstros,qntMonstros);
-			if(ehMonstro(&mapa,personagem.personagemPosicaoX,personagem.personagemPosicaoY) && personagem.estaComPoder == 0)
+			movimentaMonstros(&mapa, &monstros, qntMonstros);
+			desenhaPersonagem(&personagem, personagem.personagemPosicaoX, personagem.personagemPosicaoY, personagem.direcaoBitmap);
+
+
+			if (ehMonstro(&mapa, personagem.personagemPosicaoX, personagem.personagemPosicaoY) && personagem.estaComPoder == 0)
 			{
 				personagem.personagemPosicaoX = 40;
 				personagem.personagemPosicaoY = 40;
 				game = 0;
+				leMapa(&mapa);
 			}
+
+			if (verificarPlacar(&mapa, personagem.personagemPosicaoX, personagem.personagemPosicaoY)) {
+				while (1) {
+					al_flip_display();
+
+					al_draw_scaled_bitmap(bitmapPergunta, 0, 0, 1280, 960, 0, 0, 1280, 960, 0);
+
+					al_get_keyboard_state(&keyboardState);
+					al_wait_for_event(filaEventos, &evento);
+
+					registraEventosNaFila(filaEventos, display, timer);
+
+					if (al_key_down(&keyboardState, ALLEGRO_KEY_A))
+					{
+						while (1) {
+							al_flip_display();
+
+							al_draw_scaled_bitmap(bitmapVenceu, 0, 0, 1280, 960, 0, 0, 1280, 960, 0);
+							al_get_keyboard_state(&keyboardState);
+							al_wait_for_event(filaEventos, &evento);
+
+							registraEventosNaFila(filaEventos, display, timer);
+							if(al_key_down(&keyboardState, ALLEGRO_KEY_ENTER))							
+							{
+								
+								break;
+							}
+						}
+						break;
+					}
+
+					if (al_key_down(&keyboardState, ALLEGRO_KEY_B))
+					{
+						break;
+					}
+
+					if (al_key_down(&keyboardState, ALLEGRO_KEY_C))
+					{
+						break;
+					}
+					personagem.personagemPosicaoX = 40;
+					personagem.personagemPosicaoY = 40;
+					game = 0;
+					leMapa(&mapa);
+					
+				}
+				
+			}
+		
 		}
 	}
-	
 	removeComponentes(display, &personagem, filaEventos, timer, mapa, &monstros);
 	
 }
