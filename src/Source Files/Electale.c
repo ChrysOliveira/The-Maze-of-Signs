@@ -78,6 +78,7 @@ int main() {
 	ALLEGRO_TIMER* timer;
 	ALLEGRO_KEYBOARD_STATE keyboardState;
 	ALLEGRO_BITMAP* fundo;
+	ALLEGRO_BITMAP* imgIntro;
 	ALLEGRO_FONT* fonte = NULL;
 
 	al_init();
@@ -117,6 +118,7 @@ int main() {
 	bitmapPlacarA = al_load_bitmap("../../assets/bitmaps/A.png");
 	bitmapPlacarS = al_load_bitmap("../../assets/bitmaps/S.png");
 	fundo = al_load_bitmap("../../assets/bitmaps/menuImg.png");
+	imgIntro = al_load_bitmap("../../assets/bitmaps/imgIntro.png");
 	fonte = al_load_font("../../assets/fonte/fonte.ttf", 48, 0);
 
 
@@ -156,6 +158,20 @@ int main() {
 
 				if (al_key_down(&keyboardState, ALLEGRO_KEY_ENTER))
 				{
+					while (1)
+					{
+						al_flip_display();
+
+						al_draw_bitmap(imgIntro, 0, 0, 1280, 960, 0, 0, 1280, 960, 0);
+
+						registraEventosNaFila(filaEventos, display, timer);
+
+						if (al_key_down(&keyboardState, ALLEGRO_KEY_ENTER))
+						{
+							break;
+						}
+					}
+
 					game = 1;
 					desenhaMapa(&mapa, bitmapChao, bitmapParede,
 						bitmapPorta, bitmapDica, bitmapPoder,
