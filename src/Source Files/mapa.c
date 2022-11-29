@@ -238,15 +238,14 @@ void ehDica(Mapa* mapa, int posicaoX, int posicaoY) {
 	}
 }
 
-//assim que o personagem passar, ir� trocar o valor na matriz de 5 para 0
-void ehPoder(Mapa* mapa, int posicaoX, int posicaoY) {
+int ehPoder(Mapa* mapa, int posicaoX, int posicaoY) {
 	int x = posicaoY / 40;
 	int y = posicaoX / 40;
 
 	if (mapa->matriz[x][y] == PODER) {
-		mapa->matriz[x][y] = CHAO;
-
+		return 1;
 	}
+	return 0;
 }
 
 int ehMonstro(Mapa* mapa, int posicaoX, int posicaoY) {
@@ -260,4 +259,9 @@ int ehMonstro(Mapa* mapa, int posicaoX, int posicaoY) {
 	return 0;
 }
 
+void desenhaChao(Mapa* mapa, int posicaoX, int posicaoY) {
+	int x = posicaoY / 40;
+	int y = posicaoX / 40;
 
+	mapa->matriz[x][y] = CHAO;
+}

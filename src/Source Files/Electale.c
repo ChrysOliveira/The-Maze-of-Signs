@@ -123,8 +123,8 @@ int main() {
 
 
 	bitmapPergunta = al_load_bitmap("../../assets/bitmaps/pergunta_final.png");
-	bitmapVenceu = al_load_bitmap("../../assets/bitmaps/tela_vitoria.png");
-	bitmapderrota = al_load_bitmap("../../assets/bitmaps/tela_derrota.png");
+	bitmapVenceu = al_load_bitmap("../../assets/bitmaps/tela_vitoria.jpg");
+	bitmapderrota = al_load_bitmap("../../assets/bitmaps/tela_derrota.jpg");
 
 	leMapa(&mapa);
 	registraEventosNaFila(filaEventos, display, timer);
@@ -136,6 +136,7 @@ int main() {
 
 
 	int game = 0;
+	int tempoComPoder = 0;
 	while (1) {
 
 		if (game == 0)
@@ -201,16 +202,51 @@ int main() {
 
 			al_get_keyboard_state(&keyboardState);
 			movimenta(&mapa, keyboardState, &personagem, bitmapChao);
-			movimentaMonstros(&mapa, &monstros, qntMonstros);
-			desenhaPersonagem(&personagem, personagem.personagemPosicaoX, personagem.personagemPosicaoY, personagem.direcaoBitmap);
-
-
-			if (ehMonstro(&mapa, personagem.personagemPosicaoX, personagem.personagemPosicaoY) && personagem.estaComPoder == 0)
+			movimentaMonstros(&mapa,&monstros,qntMonstros);
+			
+			if(ehPoder(&mapa,personagem.personagemPosicaoX,personagem.personagemPosicaoY))
 			{
-				personagem.personagemPosicaoX = 40;
-				personagem.personagemPosicaoY = 40;
-				game = 0;
-				leMapa(&mapa);
+				desenhaChao(&mapa,personagem.personagemPosicaoX, personagem.personagemPosicaoY);
+				personagem.estaComPoder = 1;
+			}
+			
+			if(ehMonstro(&mapa,personagem.personagemPosicaoX,personagem.personagemPosicaoY))
+			{
+				if(personagem.estaComPoder == 0)
+				{
+					personagem.personagemPosicaoX = 40;
+					personagem.personagemPosicaoY = 40;
+					game = 0;
+					while (1) {
+
+						al_flip_display();
+
+						al_draw_scaled_bitmap(bitmapderrota, 0, 0, 1280, 960, 0, 0, 1280, 960, 0);
+						al_get_keyboard_state(&keyboardState);
+						al_wait_for_event(filaEventos, &evento);
+
+						registraEventosNaFila(filaEventos, display, timer);
+						if (al_key_down(&keyboardState, ALLEGRO_KEY_R))
+						{
+							personagem.personagemPosicaoX = 40;
+							personagem.personagemPosicaoY = 40;
+							leMapa(&mapa);
+							game = 0;
+							break;
+						}
+					}
+				}
+			}
+
+			if(personagem.estaComPoder)
+			{
+				tempoComPoder++;
+			}
+
+			if(tempoComPoder == 300)
+			{
+				personagem.estaComPoder = 0;
+				tempoComPoder = 0;
 			}
 
 			if (verificarPlacar(&mapa, personagem.personagemPosicaoX, personagem.personagemPosicaoY)){
@@ -270,8 +306,7 @@ int main() {
 						break;
 					}
 						 
-						
-
+					
 					if (al_key_down(&keyboardState, ALLEGRO_KEY_C))
 					{
 
